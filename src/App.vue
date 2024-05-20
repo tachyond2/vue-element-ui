@@ -22,6 +22,11 @@ onMounted(()=>{
 
   <main>
     <Button type="primary" size="small" plain disabled ref="buttonRef">test</Button>
+    <h1>h1</h1>
+    <h2>h2</h2>
+    <h3>h3</h3>
+    <h4>h4</h4>
+    <hr>
   </main>
 </template>
 

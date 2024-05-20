@@ -34,10 +34,9 @@ native attribute support
 System-lelvel color Ststem
 -  base color
 -  nertual color
-
 Product-level Color System
 - brand color
-= functional color
+- functional color
 
 *css solution*
 inline css
@@ -51,12 +50,11 @@ css preprocessor
     - @each $type, $color in (primary...), ()
     - install: npm install --save-dev postcss-each-variables
     - usage: postcss([require('postcss-each-variables')])
-    
+  - Better CSS Readability and language extension
+   - postcss-nested
 
 css module
-
 css in js
-
 utility first css
-
+element ui ant design
 *color system*
