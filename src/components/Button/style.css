@@ -1,0 +1,19 @@
+.vk-button{
+  --vk-button-hover-text-color: var(--vk-color-primary);
+  --vk-button-hover-bg-color: var(--vk-color-primary-light-7);
+  --vk-button-hover-border-color: var(--vk-color-primary-light-9);
+}
+.vk-button{
+
+
+
+
+  &:focus,
+  &:active{
+    /* outline: <outline-width> | <outline-style> | <outline-color> */
+    outline:none;
+    color: var(--vkbutton-hover-text-color);
+    background: var(--vkbutton-hover-background-color);
+    border: var(--vkbuttoon-hover-border-color);
+  }
+}
