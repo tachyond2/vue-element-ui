@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted} from 'vue'
 import Button from './components/Button/Button.vue';
-import HelloWorld from './components/HelloWorld.vue'
 import type {ButtonInstance} from './components/Button/types'
+
+import HelloWorld from './components/HelloWorld.vue'
+import Collapse from './components/Collapse/Collapse.vue'
+import Item from './components/Collapse/CollapseItem.vue'
 const buttonRef = ref<ButtonInstance | null>(null)
 onMounted(()=>{
   if(buttonRef.value){
@@ -21,12 +24,23 @@ onMounted(()=>{
   </header>
 
   <main>
-    <Button type="primary" size="small" plain disabled ref="buttonRef">test</Button>
-    <Button type="primary" size="small" plain disabled ref="buttonRef">test</Button>
-    <Button type="primary">hello word</Button>
-    <Button type="primary" plain>hello word</Button>
-    
 
+    
+    <Collapse>
+      <Item name="a">
+        <template #title>
+          <h1>this is title a </h1>
+        </template>
+        <div> this is content a</div>
+      </Item>
+      <Item name='b' title="this is title b">
+        <div> this is content b</div>
+      </Item>
+      <Item name="c" disabled title="this is title c">
+        <div>this is content c</div>
+      </Item>
+      
+    </Collapse>
   </main>
 </template>
 
