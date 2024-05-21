@@ -7,10 +7,14 @@ import HelloWorld from './components/HelloWorld.vue'
 import Collapse from './components/Collapse/Collapse.vue'
 import Item from './components/Collapse/CollapseItem.vue'
 const buttonRef = ref<ButtonInstance | null>(null)
+
+const openFAQs = ref(['a'])
+
 onMounted(()=>{
   if(buttonRef.value){
     console.log(buttonRef.value.ref)
   }
+  setTimeout(() => openFAQs.value = ['a', 'b'], 2000)
 })
 </script>
 
@@ -26,7 +30,7 @@ onMounted(()=>{
   <main>
 
     
-    <Collapse>
+    <Collapse v-model="openFAQs" accordion>
       <Item name="a">
         <template #title>
           <h1>this is title a </h1>
@@ -41,6 +45,7 @@ onMounted(()=>{
       </Item>
       
     </Collapse>
+    {{ openFAQs }}
   </main>
 </template>
 

@@ -7,23 +7,39 @@
 </template>
 
 <script setup lang="ts">
-import {ref, provide} from 'vue'
+import {ref, provide, watch} from 'vue'
 
-import type {  NameType } from './types'
+import {  type NameType, type CollapseProps, type CollapseEmits } from './types'
 import {collapseContextKey} from './types'
 defineOptions({
-  name: 'VKCollapseItem'
+  name: 'VKCollapse'
 })
-// defineProps<collapseProps>()
-const activeItems = ref<NameType[]>([])
+const props = defineProps<CollapseProps>()
+const emits = defineEmits<CollapseEmits>()
+
+const activeItems = ref<NameType[]>(props.modelValue)
+
+watch(() => props.modelValue, () => {
+  activeItems.value = props.modelValue
+})
+
+if(props.accordion && activeItems.value.length > 1){
+  console.log('accordion mode should only have one active item')
+}
 
 const handleItemClick = (itemId: NameType) => {
-  const itemIndex = activeItems.value.indexOf(itemId)
-  if(itemIndex > -1){
-    activeItems.value.splice(itemIndex, 1)
-  } else {
-    activeItems.value.push(itemId)
+  if(props.accordion){
+    activeItems.value = [ itemId === activeItems.value[0] ? '' : itemId ]
+  }else {
+    const itemIndex = activeItems.value.indexOf(itemId)
+    if(itemIndex > -1){
+      activeItems.value.splice(itemIndex, 1)
+    } else {
+      activeItems.value.push(itemId)
+    }
   }
+  emits('update:modelValue', activeItems.value)
+  emits('change', activeItems.value)
 }
 
 provide(collapseContextKey ,{

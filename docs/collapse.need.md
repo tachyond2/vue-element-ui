@@ -79,3 +79,17 @@ remove => ['a']
 ```ts
 expandItems.include(props.title)
 ```
+
+
+*vue基础*
+
+v-model
+```vue
+<CutomInput v-model='searchText'/>
+
+// euqivalent
+<CustomInput
+  :modelValue="searchText"
+  @update:modelValue="newValue => searchText = newValue"
+/>
+```

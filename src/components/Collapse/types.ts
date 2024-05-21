@@ -7,8 +7,20 @@ export interface CollapseItemProps {
 }
 
 
+
+
 export type NameType = string | number
 
+
+export interface CollapseProps {
+  modelValue: NameType[],
+  accordion?: boolean
+}
+
+export interface CollapseEmits {
+  (e: 'update:modelValue', values: NameType[]) : void
+  (e: 'change', values: NameType[]) : void
+}
 
 export interface collapseContext {
   activeItems: Ref<NameType[]>;
