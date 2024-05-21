@@ -2,7 +2,7 @@
 
 
 *需求分析*
-属性列表
+属性列表props
 - type: Default Primary Danger Info Warning Success
 - plain: border-fill replace background-fill
 - round:
@@ -12,9 +12,28 @@
 - icon
 - loading 
 
+
+
 ```js
 class='ve-button-primary vm-button-large vm-button-isRound'
 ```
+z-index 
+- is used to control stacking order, to figure out which one shows up "on top" if they overlap
+
+layout flow 
+
+inline formating context vs block formating context
+- Without the width: 100% declaration, as you may have suspected, an inline-block will shrink to fit its contents
+
+css white space property
+
+|            | line breaks char | extra while space | Text wrapping |
+| :--------- | :--------------- | :-------------- | :------------ |
+| `normal`   | Collapse         | Collapse        | Wrap          |
+| `pre`      | Preserve         | Preserve        | No wrap       |
+| `nowrap`   | Collapse         | Collapse        | No wrap       |
+| `pre-wrap` | Preserve         | Preserve        | Wrap          |
+| `pre-line` | Preserve         | Collapse        | Wrap          |
 native attribute support
 
 *proejct structure*
@@ -46,12 +65,15 @@ css preprocessor
 - less
 - stylus
 - postcss
-  - enable variable mappping
+
+
+  - pick and choose what we use; 
+  - pre- and post-processing
+  - feature extension
     - @each $type, $color in (primary...), ()
-    - install: npm install --save-dev postcss-each-variables
-    - usage: postcss([require('postcss-each-variables')])
-  - Better CSS Readability and language extension
-   - postcss-nested
+    - postcss-nested for better CSS readability 
+    - variables mapping
+    - @for iterate
 
 css module
 css in js
