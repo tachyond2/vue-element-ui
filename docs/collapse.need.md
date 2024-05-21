@@ -81,7 +81,7 @@ expandItems.include(props.title)
 ```
 
 
-*vue基础*
+*knowledge review*
 
 v-model
 ```vue
@@ -93,3 +93,19 @@ v-model
   @update:modelValue="newValue => searchText = newValue"
 />
 ```
+
+
+![offsetHeight vs clientHeight vs scollHeight](images/css*height.png)
+
+- offsetHeight 
+
+Height occupied by the element on document
+
+- clientHeight:
+only `VISIBLE content & padding`
+CSS height + CSS padding - height of horizontal scrollbar
+
+
+- scollHeihgt
+`ENTIRE  content & padding (visible or not)`
+Height of all content + paddings, despite of height of the element.
