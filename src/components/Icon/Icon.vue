@@ -15,7 +15,7 @@ defineOptions({
   name: 'VKIcon'
 })
 const props = defineProps<IconProps>()
-const filteredProps = omit(props, ['tyep', 'color'])
+const filteredProps = computed( () => omit(props, ['tyep', 'color']))
 const customStyle = computed( () => {
   return props.color ? { color: props.color } : {}
 })

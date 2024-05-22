@@ -3,7 +3,13 @@ import { ref, onMounted} from 'vue'
 
 import Icon from './components/Icon/Icon.vue'
 
+const size = ref<any>('1x')
 
+onMounted(()=>{
+  setTimeout(()=>{
+    size.value = '3x'
+  },2000)
+})
 
 </script>
 
@@ -14,7 +20,7 @@ import Icon from './components/Icon/Icon.vue'
 
   <main>
 
-    <Icon icon="arrow-up" size="xl" type="primary"/>    
+    <Icon icon="arrow-up" :size="size" type="primary"/>    
     <Icon icon="arrow-up" rotation="90" type="info"/>    
     <Icon icon="arrow-up" flip="vertical" type="danger"/>    
     <Icon icon="arrow-up" spin type="warning"/>    
