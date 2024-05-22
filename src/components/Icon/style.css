@@ -1,0 +1,35 @@
+.vk-icon {
+  --vk-icon-color: inherit;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relatvie;
+  fill: currentColor;
+  color: var(--vk-icon-color);
+  font-size: inherit;
+  & + i {
+    margin-left: 20px;
+  }
+}
+
+@each $val in primary,info, success, warning, danger {
+  .vk-icon--$(val) {
+    --vk-icon-color: var(--vk-color-$(val))
+  }
+}
+
+.vk-icon--primary {
+  --vk-icon-color: var(--vk-color-primary)
+}
+.vk-icon--success {
+  --vk-icon-color: var(--vk-color-success)
+}
+.vk-icon--warning {
+  --vk-icon-color: var(--vk-color-warning)
+}
+.vk-icon--danger {
+  --vk-icon-color: var(--vk-color-danger)
+}
+.vk-icon--info {
+  --vk-icon-color: var(--vk-color-info)
+}
