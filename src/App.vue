@@ -2,8 +2,16 @@
 import { ref, onMounted} from 'vue'
 
 import Icon from './components/Icon/Icon.vue'
+import Button from './components/Button/Button.vue'
+import Collapse from './components/Collapse/Collapse.vue'
+import Item from './components/Collapse/CollapseItem.vue'
+import { NameType } from './components/Collapse/types'
+
 
 const size = ref<any>('1x')
+
+const openFAQs = ref<NameType>(['a'])
+
 
 onMounted(()=>{
   setTimeout(()=>{
@@ -20,11 +28,19 @@ onMounted(()=>{
 
   <main>
 
+    <Button icon="angle-right" type="primary" >with icon </Button>
+    <Button loading > loading... </Button> <br/><br/>
     <Icon icon="arrow-up" :size="size" type="primary"/>    
     <Icon icon="arrow-up" rotation="90" type="info"/>    
     <Icon icon="arrow-up" flip="vertical" type="danger"/>    
     <Icon icon="arrow-up" spin type="warning"/>    
-    <Icon icon="arrow-up" bounce type="success"/>    
+    <Icon icon="arrow-up" bounce type="success"/><br/><br/>
+    <Collapse v-model="openFAQs">
+      <Item title="this is the header"  name="a">
+        this is the item-content-
+      </Item>
+
+    </Collapse>
    
   </main>
 </template>

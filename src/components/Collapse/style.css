@@ -12,7 +12,7 @@
 .vk-collapse-item__header {
   display:flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   height: var(--vk-collapse-header-height);
   line-height: var(--vk-collapse-header-height);
   background-color: var( --vk-collapse-header-bg-color);

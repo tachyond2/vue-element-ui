@@ -10,14 +10,18 @@
     :id="`item-header-${name}`"
     @click="handleClick"
   >
+    
     <slot name="title">{{title}}</slot>
+    <Icon icon="angle-right"  class="header-angle"/>
     </div>
     <Transition name="slide" v-on="transitionEvents">
       <div class="vk-collapse-item__wrapper" v-show="isActive" >
         <div class="vk-collapse-item__content" 
           :id="`item-content-${name}`"
         >
+
           <slot/>
+
         </div>
       </div>
     </Transition>
@@ -28,6 +32,7 @@
 import { inject, computed } from 'vue'
 import type { CollapseItemProps } from './types'
 import {collapseContextKey} from './types'
+import Icon from '../Icon/Icon.vue'
 defineOptions({
   name: 'VKCollapseItem'
 })
@@ -55,8 +60,10 @@ const transitionEvents: Record<string, (el: HTMLElement) => void> = {
     el.style.overflow = ''
   },
   beforeLeave(el) { 
+
     el.style.height = `${el.scrollHeight}px`
     el.style.overflow = 'hidden'
+
     
   },
   leave(el) {
