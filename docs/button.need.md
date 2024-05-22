@@ -34,8 +34,8 @@ css white space property
 | `nowrap`   | Collapse         | Collapse        | No wrap       |
 | `pre-wrap` | Preserve         | Preserve        | Wrap          |
 | `pre-line` | Preserve         | Collapse        | Wrap          |
-native attribute support
 
+native attribute support
 *proejct structure*
 - components
  - Button

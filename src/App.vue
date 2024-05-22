@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted} from 'vue'
-import Button from './components/Button/Button.vue';
-import type {ButtonInstance} from './components/Button/types'
 
-import HelloWorld from './components/HelloWorld.vue'
+import Icon from './components/Icon/Icon.vue'
+
 import Collapse from './components/Collapse/Collapse.vue'
 import Item from './components/Collapse/CollapseItem.vue'
-const buttonRef = ref<ButtonInstance | null>(null)
+
 
 const openFAQs = ref(['a'])
 
@@ -29,7 +28,7 @@ onMounted(()=>{
 
   <main>
 
-    
+    <Icon icon="arrow-up"/>    
     <Collapse v-model="openFAQs" accordion>
       <Item name="a">
         <template #title>
