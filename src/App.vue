@@ -16,7 +16,7 @@ const size = ref<any>('1x')
 const openFAQs = ref<NameType[]>(['a'])
 
 
-const placement = ref('buttom')
+const placement = ref<any>('buttom')
 
 const trigger = ref<any>('hover')
 
@@ -31,7 +31,8 @@ const close = () => {
 
 onMounted(()=>{
   setTimeout(()=>{
-    size.value = '3x'
+    size.value = '3x',
+    placement.value = 'right'
     trigger.value = 'focus'
   },2000)
 })
@@ -46,11 +47,12 @@ onMounted(()=>{
     <Tooltip  content="showing content" :placement="placement" manual ref="tooltipRef">
       <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
     </Tooltip>
-    <Button icon="angle-right" type="primary" @click="open">open </Button>
-    <Button icon="angle-right" type="primary" @click="close">close </Button>
-  </header>
 
+  </header>
+  
   <br/>
+  <Button icon="angle-right" type="primary" @click="open">open </Button>
+  <Button icon="angle-right" type="primary" @click="close">close </Button>
   <br/>
   <br/>
 

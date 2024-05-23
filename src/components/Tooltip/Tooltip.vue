@@ -26,12 +26,14 @@
 
 <script lang="ts" setup>
 
-import {ref, reactive, watch} from 'vue'
+import {ref, reactive, watch, computed} from 'vue'
 import type { TooltipProps } from './types'
 import type { TooltipInstance } from './types'
-import {useFloating} from '@floating-ui/vue';
-import useClickOutside  from '../../hooks/useClickOutside'
+import {useFloating} from '@floating-ui/vue' 
+import useClickOutside  from '../../hooks/useClickOutside.ts'
 
+import { createPopper } from '@popperjs/core'
+import type { Instance } from '@popperjs/core'
 
 defineOptions({
   name: 'VKTooltip'
@@ -45,7 +47,7 @@ const props = withDefaults( defineProps<TooltipProps>(), {
 
 
 
-
+let popperInstance: null | Instance = null
 
 const triggerEl = ref<HTMLElement>()
 const popperEl = ref<HTMLElement>()
@@ -54,7 +56,25 @@ const tooltipEl = ref<HTMLElement>()
 const {floatingStyles} = useFloating(triggerEl, popperEl);
 
 
+const popperOptions = computed(()=>{
+  return {
+    placement: props.placement,
+    ...props.options
+  }
+})
+
+
 const isOpen = ref(false)
+
+watch(isOpen, (newValue) =>{
+  if(newValue) {
+    if(triggerEl.value && popperEl.value) {
+       popperInstance = createPopper(triggerEl.value, popperEl.value, popperOptions.value)
+    } else {
+      popperInstance?.destroy()
+    }
+  }
+})
 
 const openTooltip = () => {
   isOpen.value = true
@@ -75,12 +95,12 @@ const attachEvents = () => {
     inEvents['click'] = openTooltip
   }
 }
-if(props.manual){
+if(!props.manual){
   attachEvents()
 }
 
-watch(()=> props.manual, (newValue) => {
-    if(newValue){
+watch(()=> props.manual, (isManual) => {
+    if(isManual){
       inEvents = {}
       outEvents = {}
     } else {
