@@ -30,6 +30,7 @@ import {ref, reactive, watch} from 'vue'
 import type { TooltipProps } from './types'
 import {useFloating} from '@floating-ui/vue';
 import useClickOutside  from '../../hooks/useClickOutside'
+import type { log } from 'console';
 
 defineOptions({
   name: 'VKTooltip'
@@ -78,6 +79,7 @@ attachEvents()
 useClickOutside(tooltipEl, () => {
   if(props.triggerMode === 'focus' && isOpen.value){
     isOpen.value = false
+    console.log('useClickOutside get executed')
   }
 })
 
