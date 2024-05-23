@@ -8,14 +8,20 @@ import Item from './components/Collapse/CollapseItem.vue'
 import { NameType } from './components/Collapse/types'
 
 
+import Tooltip from './components/Tooltip/Tooltip.vue'
+
+
 const size = ref<any>('1x')
 
-const openFAQs = ref<NameType>(['a'])
+const openFAQs = ref<NameType[]>(['a'])
 
+
+const placement = ref('buttom')
 
 onMounted(()=>{
   setTimeout(()=>{
     size.value = '3x'
+
   },2000)
 })
 
@@ -23,7 +29,9 @@ onMounted(()=>{
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+    <Tooltip  content="showing content" :placement="placement">
+      <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+    </Tooltip>
   </header>
 
   <main>
@@ -39,8 +47,8 @@ onMounted(()=>{
       <Item title="this is the header"  name="a">
         this is the item-content-
       </Item>
+    </Collapse><br/><br/>
 
-    </Collapse>
    
   </main>
 </template>
