@@ -147,6 +147,28 @@ interface TooltipInstance {
 ## 开发计划
 - [x] trigger mode: hover/focus
 - [x] close/hide when click/hover outside the tooltip, open when click/hover inside the trigger
+  - inside events bind to trigger
+  - outside events bind to tooltip
+  - dynamic bind events
+```js
+// 方案一: 使用dom来绑定事件 
+// trigger mode = click
+domNodeRef.addEventListener('click', callback)
+// trigger mode = hover
+domNodeRef.addEventListener('mouseEnter', callback)
+
+// 方案二: 使用v-on 来完成
+// @click = v-on:click
+// construct event / handler pairs
+const events = {'mouseenter', openTooltip, 'mouseleave': closeTooltip}
+// bind in events bind to trigger(target)
+const inEvents = {'mouseenter', openTooltip}
+<div class="tooltip__trigger" v-on="inEvents"></div>
+// bind out events bind to tooltip
+const outEvents = {'mouseleave', openTooltip}
+<div class="tooltip" v-on="outEvents"></div>
+ 
+```
 - [x] manual trigger
 - [x] popper parameter
 - [x] animation

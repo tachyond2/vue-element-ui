@@ -5,7 +5,7 @@ import Icon from './components/Icon/Icon.vue'
 import Button from './components/Button/Button.vue'
 import Collapse from './components/Collapse/Collapse.vue'
 import Item from './components/Collapse/CollapseItem.vue'
-import { NameType } from './components/Collapse/types'
+import type { NameType } from './components/Collapse/types'
 
 
 import Tooltip from './components/Tooltip/Tooltip.vue'
@@ -18,10 +18,12 @@ const openFAQs = ref<NameType[]>(['a'])
 
 const placement = ref('buttom')
 
+ const trigger = ref<any>('hover')
+
 onMounted(()=>{
   setTimeout(()=>{
     size.value = '3x'
-
+    trigger.value = 'focus'
   },2000)
 })
 
@@ -29,10 +31,14 @@ onMounted(()=>{
 
 <template>
   <header>
-    <Tooltip  content="showing content" :placement="placement">
+    <Tooltip  content="showing content" :placement="placement" :triggerMode="trigger">
       <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
     </Tooltip>
   </header>
+
+  <br/>
+  <br/>
+  <br/>
 
   <main>
 
