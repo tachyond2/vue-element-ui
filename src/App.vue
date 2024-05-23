@@ -6,7 +6,7 @@ import Button from './components/Button/Button.vue'
 import Collapse from './components/Collapse/Collapse.vue'
 import Item from './components/Collapse/CollapseItem.vue'
 import type { NameType } from './components/Collapse/types'
-
+import type { TooltipInstance} from './components/Tooltip/types.ts'
 
 import Tooltip from './components/Tooltip/Tooltip.vue'
 
@@ -18,7 +18,16 @@ const openFAQs = ref<NameType[]>(['a'])
 
 const placement = ref('buttom')
 
- const trigger = ref<any>('hover')
+const trigger = ref<any>('hover')
+
+const tooltipRef = ref<TooltipInstance>()
+
+const open = () => {
+  tooltipRef.value?.open()
+}
+const close = () => {
+  tooltipRef.value?.close()
+}
 
 onMounted(()=>{
   setTimeout(()=>{
@@ -34,6 +43,11 @@ onMounted(()=>{
     <Tooltip  content="showing content" :placement="placement" :triggerMode="trigger">
       <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
     </Tooltip>
+    <Tooltip  content="showing content" :placement="placement" manual ref="tooltipRef">
+      <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+    </Tooltip>
+    <Button icon="angle-right" type="primary" @click="open">open </Button>
+    <Button icon="angle-right" type="primary" @click="close">close </Button>
   </header>
 
   <br/>
