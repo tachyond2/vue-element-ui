@@ -7,7 +7,7 @@ import Collapse from './components/Collapse/Collapse.vue'
 import Item from './components/Collapse/CollapseItem.vue'
 import type { NameType } from './components/Collapse/types'
 import type { TooltipInstance} from './components/Tooltip/types.ts'
-
+import type { Options} from '@popperjs/core'
 import Tooltip from './components/Tooltip/Tooltip.vue'
 
 
@@ -21,7 +21,7 @@ const placement = ref<any>('buttom')
 const trigger = ref<any>('hover')
 
 const tooltipRef = ref<TooltipInstance>()
-
+const options:Partial<Options> = { placement:' bottom-end', strategy: 'fixed'}
 const open = () => {
   tooltipRef.value?.open()
 }
@@ -44,7 +44,7 @@ onMounted(()=>{
     <Tooltip  content="showing content" :placement="placement" :triggerMode="trigger">
       <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
     </Tooltip>
-    <Tooltip  content="showing content" :placement="placement" manual ref="tooltipRef">
+    <Tooltip  content="showing content" :placement="placement" manual ref="tooltipRef" :popper-options="options">
       <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
     </Tooltip>
 

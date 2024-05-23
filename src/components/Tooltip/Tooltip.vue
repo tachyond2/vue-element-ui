@@ -11,14 +11,17 @@
     >
       <slot/>
     </div>
-    <div
-      v-show="isOpen"
-      class="vk-tooltip__popper"
-      ref="popperEl"
-      :style="floatingStyles"
-    >
-      <slot name="content">{{content}}</slot>
-    </div>
+    <Transition name="fade">
+
+      <div
+        v-show="isOpen"
+        class="vk-tooltip__popper"
+        ref="popperEl"
+        :style="floatingStyles"
+      >
+        <slot name="content">{{content}}</slot>
+      </div>
+    </Transition>
 
 
   </div>
@@ -30,7 +33,7 @@ import {ref, reactive, watch, computed} from 'vue'
 import type { TooltipProps } from './types'
 import type { TooltipInstance } from './types'
 import {useFloating} from '@floating-ui/vue' 
-import useClickOutside  from '../../hooks/useClickOutside.ts'
+import useClickOutside  from '../../hooks/useClickOutside'
 
 import { createPopper } from '@popperjs/core'
 import type { Instance } from '@popperjs/core'
@@ -53,15 +56,18 @@ const triggerEl = ref<HTMLElement>()
 const popperEl = ref<HTMLElement>()
 const tooltipEl = ref<HTMLElement>()
 
-const {floatingStyles} = useFloating(triggerEl, popperEl);
 
 
 const popperOptions = computed(()=>{
   return {
     placement: props.placement,
-    ...props.options
+    ...props.popperOptions
   }
 })
+
+// const {floatingStyles} = ref(useFloating(triggerEl, popperEl, popperOptions.value)).value;
+const {floatingStyles} = useFloating(triggerEl, popperEl, popperOptions.value)
+
 
 
 const isOpen = ref(false)
@@ -132,5 +138,6 @@ defineExpose<TooltipInstance>({
 </script>
 
 <style scoped>
+
 
 </style>
