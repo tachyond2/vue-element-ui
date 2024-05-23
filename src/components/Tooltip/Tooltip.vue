@@ -20,6 +20,8 @@
         :style="floatingStyles"
       >
         <slot name="content">{{content}}</slot>
+      <div id="arrow" data-popper-arrow></div>
+
       </div>
     </Transition>
 
@@ -37,6 +39,9 @@ import useClickOutside  from '../../hooks/useClickOutside'
 
 import { createPopper } from '@popperjs/core'
 import type { Instance } from '@popperjs/core'
+
+import { debounce } from 'lodash-es'
+import type { log } from 'console'
 
 defineOptions({
   name: 'VKTooltip'
@@ -56,11 +61,21 @@ const triggerEl = ref<HTMLElement>()
 const popperEl = ref<HTMLElement>()
 const tooltipEl = ref<HTMLElement>()
 
+let openTimes = 0
+let closeTimes = 0
 
 
 const popperOptions = computed(()=>{
   return {
     placement: props.placement,
+    modifiers: [
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 9],
+        },
+      }
+    ],
     ...props.popperOptions
   }
 })
@@ -83,10 +98,26 @@ watch(isOpen, (newValue) =>{
 })
 
 const openTooltip = () => {
+  openTimes++
+  console.log('open times', openTimes)
   isOpen.value = true
 }
 const closeTooltip = () => {
+  closeTimes++
+  console.log('close times', closeTimes)
   isOpen.value = false
+}
+
+const openDebounce = debounce(openTooltip, props.openDelay)
+const closeDebounce = debounce(closeTooltip, props.closeDelay)
+
+const openFinal = () => {
+  closeDebounce.cancel()
+  openDebounce()
+}
+const closeFinal = () => {
+  openDebounce.cancel()
+  closeDebounce()
 }
 
 let inEvents:Record<string, Function> = reactive({})
@@ -94,11 +125,11 @@ let outEvents:Record<string, Function> = reactive({})
 
 const attachEvents = () => {
   if(props.triggerMode === 'hover') {
-    inEvents['mouseenter'] = openTooltip
-    outEvents['mouseleave'] = closeTooltip
+    inEvents['mouseenter'] = openFinal
+    outEvents['mouseleave'] = closeFinal
     
   } else if( props.triggerMode === 'focus' ) {
-    inEvents['click'] = openTooltip
+    inEvents['click'] = openFinal
   }
 }
 if(!props.manual){
@@ -116,7 +147,7 @@ watch(()=> props.manual, (isManual) => {
 
 useClickOutside(tooltipEl, () => {
   if(props.triggerMode === 'focus' && isOpen.value && !props.manual){
-    isOpen.value = false
+    closeTooltip()
     console.log('useClickOutside get executed')
   }
 })
@@ -130,8 +161,8 @@ watch(() => props.triggerMode, (newTrigger, oldTrigger) => {
  })
 
 defineExpose<TooltipInstance>({
-  'open': openTooltip,
-  'close': closeTooltip
+  'open': openFinal,
+  'close': closeFinal
 })
 
 

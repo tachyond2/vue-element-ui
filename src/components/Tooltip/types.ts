@@ -5,7 +5,9 @@ export interface TooltipProps {
   triggerMode?: 'hover' | 'focus' ;
   manual?: boolean
   placement?: Placement;
-  popperOptions?: Partial<Options>
+  popperOptions?: Partial<Options>;
+  openDelay?: number;
+  closeDelay?: number;
 }
 
 export interface TooltipInstance {

@@ -11,6 +11,10 @@ import type { Options} from '@popperjs/core'
 import Tooltip from './components/Tooltip/Tooltip.vue'
 
 
+import Message from './components/Message/Message.vue'
+import { createMessage } from './components/Message/method'
+
+
 const size = ref<any>('1x')
 
 const openFAQs = ref<NameType[]>(['a'])
@@ -33,15 +37,18 @@ onMounted(()=>{
   setTimeout(()=>{
     size.value = '3x',
     placement.value = 'right'
-    trigger.value = 'focus'
   },2000)
+  createMessage({content:'Message component created by function call', duration: 0})
 })
 
 </script>
 
 <template>
   <header>
-    <Tooltip  content="showing content" :placement="placement" :triggerMode="trigger">
+    <Message content="message" type="success"/>
+    <br/><br/>
+    <Message content="message" show-close :duration="0"/>
+    <Tooltip  content="showing content" :placement="placement" :triggerMode="trigger" :open-delay="1000" :close-delay="1000">
       <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
     </Tooltip>
     <Tooltip  content="showing content" :placement="placement" manual ref="tooltipRef" :popper-options="options">
